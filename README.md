@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -12,7 +11,5 @@
 </div>
 
 <h1 style="text-align: center; color: #007bff;">Welcome to My GitHub Page</h1>
-<!-- Your content goes here -->
-<script src="script.js"></script>
 </body>
 </html>
