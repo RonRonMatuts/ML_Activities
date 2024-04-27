@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Cartoonish GitHub Page</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background-color: #f7ecd0; /* Light yellow background */
+            margin: 0;
+            padding: 0;
+            color: #333; /* Default text color */
+        }
+        .navbar {
+            background-color: #ff6b6b; /* Reddish-pink background */
+            overflow: hidden;
+            padding: 20px 0;
+            text-align: center;
+            border-radius: 10px;
+            transition: background-color 0.3s ease; /* Add transition for smooth effect */
+        }
+        .navbar:hover {
+            background-color: #ff4d4d; /* Darker red on hover */
+        }
+        .profile-picture {
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            margin-bottom: 10px;
+            border: 3px solid #ffffff;
+            cursor: pointer; /* Change cursor to pointer for interactivity */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Add shadow effect */
+        }
+        .profile-picture:hover {
+            border-color: #ffbb91; /* Lighter pink border on hover */
+        }
+        h1 {
+            color: #ffffff; /* White color for headings */
+            margin: 0;
+            font-size: 36px; /* Larger font size */
+        }
+        h2 {
+            text-align: center;
+            color: #f72585; /* Pinkish-purple color for main heading */
+            margin-bottom: 30px; /* Add some space below the heading */
+            font-size: 24px; /* Larger font size */
+        }
+        .welcome-text {
+            font-size: 18px;
+            line-height: 1.5;
+            max-width: 600px;
+            margin: auto;
+            padding: 0 20px;
+            color: #5a189a; /* Dark purple color for text */
+            text-align: justify;
+        }
+        .welcome-text p {
+            margin-bottom: 20px; /* Add space between paragraphs */
+        }
+        .columns {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+        .column {
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, transform 0.2s ease; /* Add transition for smooth effect */
+            cursor: pointer; /* Change cursor to pointer */
+        }
+        .column:hover {
+            background-color: #b5179e; /* Light purple background on hover */
+            transform: scale(1.05); /* Enlarge slightly on hover */
+        }
+        .section {
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+            position: relative;
+            text-align: center;
+            color: #fff; /* White text color */
+        }
+        .section h3 {
+            font-size: 32px; /* Larger font size */
+            margin-top: 0;
+            text-align: center;
+        }
+        .section p {
+            font-size: 18px; /* Larger font size */
+            margin-top: 20px;
+            text-align: justify;
+            color: #333; /* Default text color */
+        }
+        .section .shape {
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #3a0ca3; /* Darker purple background */
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .section-about-me .shape {
+            background: #f72585; /* Pinkish-purple background */
+        }
+        .section-ml-projects .shape {
+            background: #7209b7; /* Dark purple background */
+        }
+        .section-details .shape {
+            background: #9d4edd; /* Lighter purple background */
+        }
+        .section-introduction .shape {
+            background: #8338ec; /* Dark purple background */
+        }
+        .section-about-me {
+            background-color: #ffb8c6; /* Light pink background */
+        }
+        .section-ml-projects {
+            background-color: #90e0ef; /* Light blue background */
+        }
+        .section-details {
+            background-color: #fdffb6; /* Light yellow background */
+        }
+        .section-introduction {
+            background-color: #aaffc3; /* Light green background */
+        }
+        .section .content {
+            padding-top: 40px;
+        }
+        .section ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .section ul li {
+            margin-bottom: 10px;
+        }
+        .section-details .content p:last-child {
+            margin-bottom: 0;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 600px;
+            padding: 20px;
+            border: 1px solid #888;
+            background-color: #ffffff;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .modal-img {
+            width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+        }
+        .apply-btn {
+            background-color: #7209b7; /* Dark purple background */
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .apply-btn:hover {
+            background-color: #560bad; /* Darker purple on hover */
+        }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <img src="file:///C:/Users/byron/Pictures/ralts.jpg" alt="Profile Picture" class="profile-picture" onclick="openModal()">
+    <h1>Byron Matuto</h1>
+</div>
+
+<h2>Welcome to My Cartoonish GitHub Page</h2>
+
+<div class="welcome-text">
+    <p>This is the place where I share my coding adventures, projects, and insights. Feel free to explore my repositories and connect with me.</p>
+</div>
+
+<div class="columns">
+    <div class="column" onclick="scrollToSection('introduction')" style="background-color: #aaffc3;">
+        <h3 style="color: #8338ec;">Introduction</h3>
+        <p style="color: #333;">This section introduces my background, skills, and interests. I love coding and exploring new technologies!</p>
+    </div>
+    <div class="column" onclick="scrollToSection('ml-projects')" style="background-color: #90e0ef;">
+        <h3 style="color: #7209b7;">ML Projects</h3>
+        <p style="color: #333;">Here you can find my machine learning projects and experiments. From image recognition to natural language processing!</p>
+    </div>
+</div>
+<div class="columns">
+    <div class="column" onclick="scrollToSection('about-me')" style="background-color: #ffb8c6;">
+        <h3 style="color: #f72585;">About Me</h3>
+        <ul>
+            <li style="color: #333;">Im colorblind</li>
+            <li style="color: #333;">Drawing and eating a lot is my specialty</li>
+            <li style="color: #333;">I love Ralts. They're cute and huggable</li>
+        </ul>
+    </div>
+    <div class="column" onclick="scrollToSection('details')" style="background-color: #fdffb6;">
+        <h3 style="color: #9d4edd;">Details</h3>
+        <p style="color: #333;">This section provides detailed information about my education, work experience, and contact details. Let's connect and create something awesome together!</p>
+    </div>
+</div>
+
+<!-- Introduction Section -->
+<div id="introduction" class="section section-introduction">
+    <div class="shape">I</div>
+    <div class="content">
+        <h3>Introduction</h3>
+        <p>My background, skills, and interests. I love coding and exploring new technologies!</p>
+        <p>The Programming Language I'm confident as of now is Java</p>
+    </div>
+</div>
+
+<!-- ML Projects Section -->
+<div id="ml-projects" class="section section-ml-projects">
+    <div class="shape">ML</div>
+    <div class="content">
+        <h3>ML Projects</h3>
+        <p>My machine learning projects and experiments. From image recognition to natural language processing!</p>
+        <a href="https://colab.research.google.com/drive/1qMQ2bxnY2iNlCn0qbsoAbpE-F4x2BmGo?usp=sharing">Linear Regression</a><br>
+        <a href="https://colab.research.google.com/drive/1exFk0NxOtuL4N_whN4RsTIE4xFUXbKVO?usp=sharing">Logistic Regression</a><br>
+        <a href="https://colab.research.google.com/drive/17Q-_v2S-N5_ZxHD7cqsdDPN99mrJYo1o?usp=sharing">Assessment Task #6</a><br>
+        <a href="https://colab.research.google.com/drive/1TfxIcbf9dhIXglzVRi8mmFCgc_0Wa6St?usp=sharing">Assessment Task #7</a><br>
+        <a href="https://colab.research.google.com/drive/1J8S3WRPC7uC30hE0FTH4B6RT-ehMrval?usp=sharing">Assessment Task #8</a><br>
+        <a href="https://colab.research.google.com/drive/1gozHQznLRx3niJQgM5AC9Vuq5njmSoQ-?usp=sharing">Midterm Assessment</a><br>
+        <a href="https://colab.research.google.com/drive/1NhpimGAhmvCGv8xtMnvA3hiulPhwso2f?usp=sharing">Decision Trees</a>
+    </div>
+</div>
+
+<!-- About Me Section -->
+<div id="about-me" class="section section-about-me">
+    <div class="shape">A</div>
+    <div class="content">
+        <h3>About Me</h3>
+        <ul>
+            <li>Im colorblind</li>
+            <li>Drawing and eating a lot is my specialty</li>
+            <li>I love Ralts. They're cute and huggable</li>
+        </ul>
+    </div>
+</div>
+
+<!-- Details Section -->
+<div id="details" class="section section-details">
+    <div class="shape">D</div>
+    <div class="content">
+        <h3>Details</h3>
+        <p>Soon</p>
+    </div>
+</div>
+
+<!-- Modal for profile picture -->
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img id="modal-img" src="file:///C:/Users/byron/Pictures/ralts.jpg" alt="Profile Picture" class="modal-img">
+        <input type="file" accept="image/*" onchange="previewImage(event)">
+        <button class="apply-btn" onclick="applyChanges()">Apply Changes</button>
+    </div>
+</div>
+
+<!-- Navigation Guide Modal -->
+<div id="navGuideModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeNavGuide()">&times;</span>
+        <h2>Navigation Guide</h2>
+        <p>Would you like a navigation guide for this page?</p>
+        <button class="apply-btn" onclick="toggleNavGuide(true)">Yes</button>
+        <button class="apply-btn" onclick="toggleNavGuide(false)">No</button>
+    </div>
+</div>
+
+<script>
+    var originalProfilePic = "file:///C:/Users/byron/Pictures/ralts.jpg"; // Store original profile picture
+
+    // Function to open the profile picture modal
+    function openModal() {
+        document.getElementById("myModal").style.display = "block";
+    }
+
+    // Function to close the profile picture modal
+    function closeModal() {
+        document.getElementById("myModal").style.display = "none";
+    }
+
+    // Function to preview image in the profile picture modal
+    function previewImage(event) {
+        var reader = new FileReader();
+        reader.onload = function() {
+            var output = document.getElementById("modal-img");
+            output.src = reader.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    }
+
+    // Function to apply changes made to the profile picture
+    function applyChanges() {
+        var newProfilePic = document.getElementById("modal-img").src;
+        document.querySelector('.profile-picture').src = newProfilePic;
+        originalProfilePic = newProfilePic; // Update original profile picture
+        closeModal(); // Close modal after applying changes
+    }
+
+    // Function to scroll to a specific section
+    function scrollToSection(sectionId) {
+        var section = document.getElementById(sectionId);
+        section.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Function to open the navigation guide modal
+    function openNavGuide() {
+        document.getElementById("navGuideModal").style.display = "block";
+    }
+
+    // Function to close the navigation guide modal
+    function closeNavGuide() {
+        document.getElementById("navGuideModal").style.display = "none";
+    }
+
+    // Function to toggle the navigation guide based on user input
+    function toggleNavGuide(showGuide) {
+        if (showGuide) {
+            // Show navigation guide
+            alert("Navigation guide: You can click on the sections in the navigation bar to navigate to different parts of the page.");
+        } else {
+            // Do nothing
+        }
+        closeNavGuide(); // Close the navigation guide modal
+    }
+</script>
+
+<!-- Automatically open the navigation guide modal -->
+<script>
+    window.onload = function() {
+        openNavGuide();
+    };
+</script>
+
+</body>
+</html>
